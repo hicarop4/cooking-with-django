@@ -1,42 +1,41 @@
 <div class="card">
-    <img class="card-image" src="https://picsum.photos/600" alt="Random image" />
-    <h3 class="card-title">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
-        repellat.
-    </h3>
+    <a href="{% url 'recipes:recipe' recipe.id %}">
+        <img class="card-image" src="{{recipe.cover.url}}" alt="Random image" />
+    </a>
+
+    <h3 class="card-title">{{recipe.title}}</h3>
 
     <div class="info">
         <div class="recipe-author">
             <span class="recipe-author-item">
                 <i class="fas fa-user"></i>
-                Hícaro Vitor
+                {{recipe.author.first_name}} {{recipe.author.last_name}}
             </span>
             <span class="recipe-author-item">
                 <i class="fas fa-calendar-alt"></i>
-                17/02/2023 às 11:21
+                {{recipe.created_at|date:"d/m/Y à\s H:i"}}
             </span>
             <span class="recipe-author-item">
                 <a href="/recipes/category/cafe-da-manha/">
                     <i class="fas fa-layer-group"></i>
-                    <span>Café da manhã</span>
+                    <span>{{recipe.category.name}}</span>
                 </a>
             </span>
         </div>
     </div>
 
     <div class="recipe-content">
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            fugiat commodi ullam quas modi. Ea cumque labore veniam, sequi
-            corrupti quas beatae fuga alias quae, vero dicta accusamus aliquam
-            in!
-        </p>
+        <p>{{recipe.description}}</p>
     </div>
-
-    <button class="card-footer">
-        <span>
+    {% if detail_page is not True %}
+    <a class="card-footer" href="{% url 'recipes:recipe' recipe.id %}">
+        <div class="card-button">
             <i class="fa-regular fa-eye"></i>
             Ver mais...
-        </span>
-    </button>
+        </div>
+    </a>
+    {% else %}
+    <p class="preparation-steps">{{recipe.preparation_steps|linebreaksbr}}</p>
+    <div class="go-back"><a href="{% url 'recipes:home' %}">Voltar</a></div>
+    {% endif %}
 </div>

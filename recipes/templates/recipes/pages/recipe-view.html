@@ -1,13 +1,9 @@
 {% extends 'global/base.html' %}
-
 {% block title %}
-Home
+Alterar
 {% endblock title %}
-
 {% block content %}
-<div class="card-list">
-  {% for recipe in recipes %}
+<div class="card-detail">
   {% include 'recipes/partials/recipe.html' %}
-  {% endfor %}
 </div>
 {% endblock content %}
