@@ -1,0 +1,6 @@
+{
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "search.useReplacePreview": true,
+    "editor.suggest.preview": true,
+    "workbench.editor.enablePreview": false
+}
