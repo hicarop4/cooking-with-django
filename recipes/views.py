@@ -1,15 +1,14 @@
 # Create your views here.
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-from utils import factory
 from .models import Recipe
-from django.http import HttpResponse
 
-# HTTP REQUEST
+
 def home(req):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
     return render(req, 'recipes/pages/home.html', context={
         'recipes': recipes
     })
+
 
 def category(req, category_id):
     recipes = get_list_or_404(
@@ -20,8 +19,8 @@ def category(req, category_id):
     )
 
     return render(req, 'recipes/pages/category.html', context={
-        'recipes': recipes, # get all recipes with this category
-        'title': recipes[0].category.name # get category title
+        'recipes': recipes,  # get all recipes with this category
+        'title': recipes[0].category.name  # get category title
     })
 
 
