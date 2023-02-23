@@ -7,8 +7,6 @@ class Category(models.Model):
         return f"{self.name.capitalize()}"
     
 
-class Author(models.Model):
-    author = models.CharField(max_length=65)
 
 # Create your models here.
 class Recipe(models.Model):
@@ -25,8 +23,12 @@ class Recipe(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.title.capitalize()} - by {self.author.username}" 
+    
 
 
 

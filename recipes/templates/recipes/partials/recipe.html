@@ -1,4 +1,5 @@
 <div class="card">
+    <!-- get dynamic link using app_name:name in urls.py and send recipe.id as a parameter -->
     <a href="{% url 'recipes:recipe' recipe.id %}">
         <img class="card-image" src="{{recipe.cover.url}}" alt="Random image" />
     </a>
@@ -9,18 +10,20 @@
         <div class="recipe-author">
             <span class="recipe-author-item">
                 <i class="fas fa-user"></i>
-                {{recipe.author.first_name}} {{recipe.author.last_name}}
+                {{recipe.author.username}}
             </span>
             <span class="recipe-author-item">
                 <i class="fas fa-calendar-alt"></i>
                 {{recipe.created_at|date:"d/m/Y à\s H:i"}}
             </span>
+            {% if recipe.category is not None %}
             <span class="recipe-author-item">
-                <a href="/recipes/category/cafe-da-manha/">
+                <a href="{% url 'recipes:category' recipe.category.id %}">
                     <i class="fas fa-layer-group"></i>
                     <span>{{recipe.category.name}}</span>
                 </a>
             </span>
+            {% endif %}
         </div>
     </div>
 
@@ -35,7 +38,9 @@
         </div>
     </a>
     {% else %}
-    <p class="preparation-steps">{{recipe.preparation_steps|linebreaksbr}}</p>
+    <p class="preparation-steps">
+        {{recipe.preparation_steps|linebreaksbr}}
+    </p>
     <div class="go-back"><a href="{% url 'recipes:home' %}">Voltar</a></div>
     {% endif %}
 </div>
