@@ -1,8 +1,10 @@
 <div class="card">
     <!-- get dynamic link using app_name:name in urls.py and send recipe.id as a parameter -->
+    {% if recipe.cover %}
     <a href="{% url 'recipes:recipe' recipe.id %}">
         <img class="card-image" src="{{recipe.cover.url}}" alt="Random image" />
     </a>
+    {% endif %}
 
     <h3 class="card-title">{{recipe.title}}</h3>
 

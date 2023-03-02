@@ -5,11 +5,11 @@ Home
 {% endblock title %}
 
 {% block content %}
-<div class="card-list">
+<div class='card-list'>
   {% for recipe in recipes %}
   {% include 'recipes/partials/recipe.html' %}
   {% empty %}
-  <h1 style="font-family: Helvetica, sans-serif; text-align: center;">
+  <h1 style='font-family: Helvetica, sans-serif; text-align: center;'>
     Nenhuma receita encontrada 😢
   </h1>
   {% endfor %}
