@@ -25,7 +25,7 @@ def category(req, category_id):
 
 
 def recipe(req, id):
-    recipe = get_object_or_404(Recipe.objects, id=id)
+    recipe = get_object_or_404(Recipe.objects, id=id, is_published=True)
 
     return render(req, 'recipes/pages/recipe-view.html', context={
         'recipe': recipe,

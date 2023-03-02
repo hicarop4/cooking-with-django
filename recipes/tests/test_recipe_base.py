@@ -20,7 +20,7 @@ class RecipeTestBase(TestCase):
             first_name=first_name, last_name=last_name,
         )
 
-    def make_recipe(self, category_data=None, author_data=None):
+    def make_recipe(self, category_data=None, author_data=None, is_published=True):
         if category_data is None:
             category_data = {}
         if author_data is None:
@@ -38,5 +38,5 @@ class RecipeTestBase(TestCase):
             servings_unit='porções',
             preparation_steps='Preparation steps haha',
             preparation_steps_is_html=False,
-            is_published=True
+            is_published=is_published
         )
