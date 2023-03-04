@@ -27,7 +27,6 @@ class RecipeModelTest(RecipeTestBase):
     def test_recipe_default(self, field, default):
         self.recipe.full_clean()
         self.recipe.save()
-        ...
         self.assertEqual(getattr(self.recipe, field), default)
 
     def test_recipe_string_representation(self):
