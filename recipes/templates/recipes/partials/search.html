@@ -1,12 +1,7 @@
 <div class="search-container">
-  <form class="search-form">
-    <input
-      class="search-input"
-      type="text"
-      name="search"
-      id="search"
-      placeholder="Buscando por alguma receita? Digite aqui"
-    />
+  <form action="{% url 'recipes:search' %}" method="get" class="search-form">
+    <input class="search-input" type="text" name="q" id="search" required
+      placeholder="Buscando por alguma receita? Digite aqui" />
     <button type="submit" class="search-button">
       <i class="fas fa-search"></i>
     </button>

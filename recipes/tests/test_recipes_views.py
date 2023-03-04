@@ -3,7 +3,7 @@ from recipes import views
 
 from unittest import skip
 
-from .test_recipe_base import RecipeTestBase
+from .test_recipes_base import RecipeTestBase
 
 
 class RecipeViewTest(RecipeTestBase):
@@ -100,3 +100,15 @@ class RecipeViewTest(RecipeTestBase):
         response = self.client.get(
             reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertEquals(response.status_code, 404)
+
+    def test_recipe_search_views_function_is_correct(self):
+        resolved = resolve(reverse('recipes:search'))
+        self.assertEqual(resolved.func, views.search)
+
+    def test_recipe_search_loads_correct_template(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertTemplateUsed(response, 'recipes/pages/search.html')
+
+    def test_recipe_search_raises_404_if_no_search_term(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code, 404)

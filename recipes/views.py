@@ -31,3 +31,8 @@ def recipe(req, id):
         'recipe': recipe,
         'detail_page': True
     })
+
+
+def search(req):
+    search_term = req.GET.get('q')
+    return render(req, 'recipes/pages/search.html')
