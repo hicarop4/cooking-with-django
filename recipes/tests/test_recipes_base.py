@@ -20,7 +20,8 @@ class RecipeTestBase(TestCase):
             first_name=first_name, last_name=last_name,
         )
 
-    def make_recipe(self, category_data=None, author_data=None, is_published=True):
+    def make_recipe(self, title='Recipe title', slug='recipe-slug',
+                    category_data=None, author_data=None, is_published=True):
         if category_data is None:
             category_data = {}
         if author_data is None:
@@ -29,9 +30,9 @@ class RecipeTestBase(TestCase):
         return models.Recipe.objects.create(
             category=self.make_category(**category_data),
             author=self.make_author(**author_data),
-            title='Recipe title',
+            title=title,
             description='Recipe description',
-            slug='recipes-slug',
+            slug=slug,
             preparation_time=10,
             preparation_time_unit='minutos',
             servings=5,
