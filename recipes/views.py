@@ -4,16 +4,28 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.db.models import Q
 from .models import Recipe
 from django.core.paginator import Paginator
+from utils.pagination import make_pagination_range
 
 
 def home(req):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
-    search_term = int(req.GET.get('page', '1').strip())
+
+    try:
+        current_page = int(req.GET.get('page', '1').strip())
+    except:
+        current_page = 1
 
     paginator = Paginator(recipes, 10)
-    page_obj = paginator.get_page(search_term)
+    page_obj = paginator.get_page(current_page)
+
+    pagination_range = make_pagination_range(
+        page_range=paginator.page_range,
+        qty_pages=4,
+        current_page=current_page
+    )
     return render(req, 'recipes/pages/home.html', context={
-        'recipes': page_obj
+        'recipes': page_obj,
+        'pagination_range': pagination_range
     })
 
 
