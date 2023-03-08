@@ -3,21 +3,25 @@ from django.http import Http404
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.db.models import Q
 from .models import Recipe
+from django.core.paginator import Paginator
 
 
 def home(req):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
+    search_term = int(req.GET.get('page', '1').strip())
 
+    paginator = Paginator(recipes, 10)
+    page_obj = paginator.get_page(search_term)
     return render(req, 'recipes/pages/home.html', context={
-        'recipes': recipes
+        'recipes': page_obj
     })
 
 
 def category(req, category_id):
     recipes = get_list_or_404(
         Recipe.objects.filter(
-            Q(category__id=category_id) |
-            Q(is_published=True)
+            category__id=category_id,
+            is_published=True
         )
         .order_by('-id')
     )
