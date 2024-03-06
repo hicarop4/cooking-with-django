@@ -18,6 +18,7 @@
   - Rendimento
   - Categoria
   - Imagem
+- Paginação
 - Pesquisa de receitas:
   - Por nome
   - Por ingredientes
